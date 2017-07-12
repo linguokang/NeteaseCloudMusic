@@ -1,0 +1,10 @@
+
+$baseFontSize: 23.44;//默认基准font-size
+@mixin px2rem($name, $px){
+  #{$name}: $px / $baseFontSize * 1rem;
+}
+
+
+@function px2rem($px, $base-font-size: 23.44px) {
+  @return ($px / $base-font-size) * 1rem;
+}

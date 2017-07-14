@@ -37,7 +37,13 @@ export const GET_TRAVELS_DETAIL  = 'GET_TRAVELS_DETAIL' //获取主题详情
 
 
 //搜索
-export const SET_SEARCH_INFO  = 'SETSEARCHINFO'      //设置搜索信息
-export const GET_SEARCH_INFO  = 'GETSEARCHINFO'      //获得搜索信息
-export const SET_SEARCH_TYPE  = 'SETSEARCHTYPE'      //获得搜索类型
-export const GET_SEARCH_TYPE  = 'GETSEARCHTYPE'      //获得搜索类型
+export const SET_SEARCH_INFO  = 'SET_SEARCH_INFO'      //设置搜索信息
+export const GET_SEARCH_INFO  = 'GET_SEARCH_INFO'      //获得搜索信息
+export const SET_SEARCH_TYPE  = 'SET_SEARCH_TYPE'      //获得搜索类型
+export const GET_SEARCH_TYPE  = 'GET_SEARCH_TYPE'      //获得搜索类型
+
+//歌单
+export const SET_SONGSHEET_SHOW  = 'SET_SONGSHEET_SHOW'      //设置搜索信息
+//export const GET_SONGSHEET_SHOW  = 'GET_SONGSHEET_SHOW'      //获得搜索信息
+export const SET_SONGSHEET_KEYWORD  = 'SET_SONGSHEET_KEYWORD'      //获得搜索类型
+//export const GET_SONGSHEET_KEYWORD  = 'GET_SONGSHEET_KEYWORD'      //获得搜索类型

@@ -16,7 +16,7 @@ import personalityRecommen from '@/page/personalityRecommen'
 import anchorStation   from '@/page/anchorStation'
 import rankingList  from '@/page/rankingList'
 import songSheet  from '@/page/songSheet'
-
+import filterSongSheet  from '@/page/filterSongSheet'
 Vue.use(Router)
 
 export default new Router({
@@ -78,6 +78,9 @@ export default new Router({
         }
       ]
     },
-
+    {
+      path: '/filterSongSheet',
+      component: filterSongSheet
+    }
   ]
 })

@@ -1,4 +1,4 @@
-//import api from '../../fetch/api'
+
 import * as types from '../types'
 
 const state = {
@@ -37,15 +37,6 @@ const mutations = {
     [types.SET_SEARCH_TYPE](state, res) {
       state.type = res
     },
-
-    //[types.SET_LOGIN_STATUS](state, status) {
-    //    state.loginStatus = status
-    //},
-    //
-    //[types.GET_USER_DATA](state, res) {
-    //    state.userData = res
-    //}
-
 }
 
 export default {

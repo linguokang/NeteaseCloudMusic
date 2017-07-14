@@ -20,7 +20,7 @@
           setWrapperSize :true,
           pagination : '.swiper-pagination',
           paginationClickable :true,
-          mousewheelControl : true,
+//          mousewheelControl : true,
           observeParents:true,
         },
         swiperSlides: [1, 2, 3, 4, 5]

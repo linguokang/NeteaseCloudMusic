@@ -16,6 +16,7 @@ import personalityRecommen from '@/page/personalityRecommen'
 import anchorStation   from '@/page/anchorStation'
 import rankingList  from '@/page/rankingList'
 import songSheet  from '@/page/songSheet'
+import songSheetItem  from '@/page/songSheetItem'
 import filterSongSheet  from '@/page/filterSongSheet'
 Vue.use(Router)
 
@@ -32,7 +33,7 @@ export default new Router({
         },
         {
           path: '/songSheet',
-          component: songSheet
+          component: songSheet,
         },
         {
           path: '/anchorStation',
@@ -78,9 +79,38 @@ export default new Router({
         }
       ]
     },
+    //{
+    //  path: '/filterSongSheet',
+    //  component: filterSongSheet
+    //},
     {
-      path: '/filterSongSheet',
-      component: filterSongSheet
-    }
-  ]
+      path: '/songsheetItem',
+      component: songSheetItem
+    },
+  ],
+  scrollBehavior
 })
+
+const scrollBehavior = (to, from, savedPosition) => {
+  if (savedPosition) {
+    // savedPosition is only available for popstate navigations.
+    return savedPosition
+  } else {
+    const position = {}
+    // new navigation.
+    // scroll to anchor by returning the selector
+    if (to.hash) {
+      position.selector = to.hash
+    }
+    // check if any matched route config has meta that requires scrolling to top
+    if (to.matched.some(m => m.meta.scrollToTop)) {
+      // cords will be used if no selector is provided,
+      // or if the selector didn't match any element.
+      position.x = 0
+      position.y = 0
+    }
+    // if the returned position is falsy or an empty object,
+    // will retain current scroll position.
+    return position
+  }
+}

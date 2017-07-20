@@ -186,12 +186,14 @@
    z-index: 1000;
    background: #eeeff1;
     .header{
-      position: relative;
+      position: fixed;
+      width: 100%;
       background: #d43b33;
       line-height: px2rem(40px);
       display: flex;
       flex-direction: row;
       text-align: center;
+      z-index: 1001;
       span{
         position: absolute;
         font-size: px2rem(15px);
@@ -206,6 +208,7 @@
       }
     }
    .content{
+     padding-top: px2rem(40px);
      .all{
        overflow: hidden;
        background: #fff;
@@ -268,7 +271,7 @@
               }
            }
            .active{
-             border: 1px solid red;
+             border: 2px solid red;
              z-index: 10;
            }
          }

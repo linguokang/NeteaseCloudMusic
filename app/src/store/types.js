@@ -43,7 +43,10 @@ export const SET_SEARCH_TYPE  = 'SET_SEARCH_TYPE'      //获得搜索类型
 export const GET_SEARCH_TYPE  = 'GET_SEARCH_TYPE'      //获得搜索类型
 
 //歌单
-export const SET_SONGSHEET_SHOW  = 'SET_SONGSHEET_SHOW'      //设置搜索信息
+export const SET_SONGSHEET_SHOW  = 'SET_SONGSHEET_SHOW'      //设置筛选歌单是否显示
 //export const GET_SONGSHEET_SHOW  = 'GET_SONGSHEET_SHOW'      //获得搜索信息
-export const SET_SONGSHEET_KEYWORD  = 'SET_SONGSHEET_KEYWORD'      //获得搜索类型
+export const SET_SONGSHEET_KEYWORD  = 'SET_SONGSHEET_KEYWORD'      //设置筛选歌单关键词
 //export const GET_SONGSHEET_KEYWORD  = 'GET_SONGSHEET_KEYWORD'      //获得搜索类型
+
+//正在播放
+export const SET_AUDIOPLAY_SHOW  = 'SET_AUDIOPLAY_SHOW'      //设置播放器是否显示

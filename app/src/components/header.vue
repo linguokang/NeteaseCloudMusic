@@ -8,7 +8,7 @@
     </div>
     <div class="right">
       <slot name='cancel'></slot>
-      <img src="../assets/Playing_now.png">
+      <img src="../assets/Playing_now.png" @click='showAudio'>
     </div>
   </div>
 </template>
@@ -24,8 +24,8 @@
 
     },
     methods: {
-      itemclick(index){
-        this.activeNunber = index
+      showAudio(){
+        this.$store.dispatch('showaudioplay', true)
       }
     },
     components: {

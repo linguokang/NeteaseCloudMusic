@@ -13,7 +13,7 @@
       </ul>
     </div>
     <ul class="recommendedSongs">
-      <li v-for='item in items'>
+      <li v-for='(item,index) in items' @click='intodetial(index)'>
         <div class="item_content">
           <img :src="item.coverImgUrl">
           <em>
@@ -67,6 +67,9 @@
       })
     },
     methods: {
+      intodetial(index){
+        this.$router.push('/songsheetItem?id='+this.items[index].id)
+      },
       chooseTag(name){
         this.$store.dispatch('setSongSheetKeyword', name)
       },

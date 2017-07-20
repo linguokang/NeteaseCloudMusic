@@ -59,9 +59,9 @@
 
       infinite(done) {
 //        setTimeout(() => {
-          if(this.$route.path.indexOf('songSheet')!==-1){
-      console.log('infinite')
-      this.$refs.child.$emit('childMethod',done) // 方法1
+      if(this.$route.path.indexOf('songSheet')!==-1){
+        console.log('infinite')
+        this.$refs.child.$emit('childMethod',done) // 方法1
 //      done()
       }else{
       done()

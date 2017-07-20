@@ -7,7 +7,10 @@ import store from './store/store'
 import './config/rem'
 import VueScroller from 'vue-scroller'
 import axios from 'axios'
+import { Slider } from 'element-ui'
+import 'element-ui/lib/theme-default/index.css'
 
+Vue.use(Slider)
 Vue.prototype.$http = axios
 
 Vue.config.productionTip = false

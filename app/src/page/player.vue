@@ -22,8 +22,9 @@
         <li><img src="../assets/dot.png"></li>
       </ul>
       <div class="slider">
-        <span>00:00</span>
-        <el-slider v-model="value1" @change='change' :min="0" :max="formatMax"></el-slider>
+        <!--<span>{{currentTime}}</span>-->
+        <span>{{currentTime}}</span>
+        <el-slider v-model="progres" @change='change' :min="0" :max="formatMax"></el-slider>
         <span>{{format}}</span>
       </div>
       <div class="control">
@@ -52,10 +53,10 @@
   export default{
     data(){
       return {
-        id:297113,
+        id:'',
         show: true,
 //        show: false,
-        value1: 0,
+        progres: 0,
         song:[
           {
             name: "",
@@ -75,7 +76,8 @@
             url:''
           }
         ],
-        playing:true
+        playing:true,
+        currentTime:''
       }
     },
     computed: {
@@ -87,33 +89,45 @@
       },
       getshowaudioplay(){
         return this.$store.state.com.showaudio
-      }
+      },
+      getsongplayid(){
+        return this.$store.state.com.songId
+      },
     },
     watch:{
       getshowaudioplay(){
         this.show = this.getshowaudioplay
+      },
+      getsongplayid(){
+        this.id = this.getsongplayid
+        this.getData()
+        this.getUrl()
       }
     },
     mounted(){
+      this.id = this.$store.state.com.songId
+      console.log(this.id)
       this.getData()
       this.getUrl()
-      this.id = this.$route.query.id
-      this.id = 297113
     },
     activated() {
-      this.id = this.$route.query.id
-      this.id = 297113
+      this.id = this.$store.state.com.songId
       this.getData()
+      this.getUrl()
     },
     methods: {
+      formatcurrentTime(){
+        const audio = document.getElementById('audio')
+        this.currentTime = new Date(audio.currentTime*1000).Format("mm:ss");
+      },
       hideAudio(){
-
         this.$store.dispatch('showaudioplay', false)
-        console.log(this.$store.state.com.showaudio)
+//        console.log(this.$store.state.com.showaudio)
       },
       change(e){
-        console.log(e)
-        this.setCurTime(e)
+        if(e%1 === 0 ){
+            this.setCurTime(e)
+        }
       },
       formatTooltip(val) {
         return val / 100;
@@ -159,7 +173,9 @@
 
       },
       timeupdate (e) {
-        console.log('timeupdate')
+        const audio = document.getElementById('audio')
+        this.progres = audio.currentTime
+        this.formatcurrentTime()
       },
       playing (e) {
         console.log('playing')
@@ -200,7 +216,7 @@
       top: 0;
       width: 100%;
       min-height: 100%;
-      -webkit-filter:blur(20px);
+      -webkit-filter:blur(20px) grayscale(0.7);
       z-index: -1;
     }
     .header{

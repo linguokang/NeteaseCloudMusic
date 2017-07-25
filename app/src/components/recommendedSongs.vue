@@ -1,6 +1,6 @@
 <template>
   <ul class="recommendedSongs">
-    <li v-for='item in items'>
+    <li v-for='item in items' @click='linktosheet(item.id)'>
       <img :src="item.picUrl">
       <div>{{item.name}}</div>
       <em>
@@ -27,8 +27,9 @@
       this.getData()
     },
     methods: {
-      itemclick(index){
-//        this.activeNunber = index
+      linktosheet(id){
+        console.log(id)
+        this.$router.push({ name: 'songsheetItem', query: { id: id }})
       },
       getPlayCount(){
         this.items.map(function(item){

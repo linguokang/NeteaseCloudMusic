@@ -50,3 +50,4 @@ export const SET_SONGSHEET_KEYWORD  = 'SET_SONGSHEET_KEYWORD'      //设置筛�
 
 //正在播放
 export const SET_AUDIOPLAY_SHOW  = 'SET_AUDIOPLAY_SHOW'      //设置播放器是否显示
+export const SET_SONG_ID  = 'SET_SONG_ID'      //设置播放器音乐id

@@ -18,6 +18,8 @@ import rankingList  from '@/page/rankingList'
 import songSheet  from '@/page/songSheet'
 import songSheetItem  from '@/page/songSheetItem'
 import filterSongSheet  from '@/page/filterSongSheet'
+import comment  from '@/page/comment'
+import highqualityPlaylist  from '@/page/highqualityPlaylist'
 Vue.use(Router)
 
 export default new Router({
@@ -84,9 +86,21 @@ export default new Router({
     //  component: filterSongSheet
     //},
     {
+      name: 'songsheetItem',
       path: '/songsheetItem',
-      component: songSheetItem
+      component: songSheetItem,
     },
+    {
+      name: 'comment',
+      path: '/comment',
+      component: comment,
+    },
+    {
+      name: 'highqualityPlaylist',
+      path: '/highqualityPlaylist',
+      component: highqualityPlaylist,
+    },
+
   ],
   scrollBehavior
 })
@@ -114,3 +128,4 @@ const scrollBehavior = (to, from, savedPosition) => {
     return position
   }
 }
+

@@ -55,7 +55,7 @@
         </div>
       </div>
       <ul class="playList_item">
-        <li v-for='(track,index) in playlist.tracks'>
+        <li v-for='(track,index) in playlist.tracks' @click='playsong(track.id)'>
           <div class="left">
             <span class="number">{{index}}</span>
             <div>
@@ -75,10 +75,7 @@
     </div>
 
   </div>
-
-
 </template>
-
 <script>
   import { baseUrl } from '../config/env.js'
   import playlist from '../components/playlist'
@@ -104,6 +101,11 @@
 
     },
     methods: {
+      playsong(id){
+        this.$store.dispatch('showaudioplay', true)
+        this.$store.dispatch('setsongId',id)
+//                console.log(this.$store.state.com.songId)
+      },
       getData(){
         const that = this
 

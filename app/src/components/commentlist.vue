@@ -1,50 +1,5 @@
 <template>
-  <div class="commentlist">
-    <scroller :on-infinite="infinite" ref="my_scroller">
-    <div class="title">精彩评论</div>
-    <ul>
-      <li v-for="(comment, index) in data.hotComments">
-        <div class="comment_top">
-          <div class="comment_author">
-            <img :src="comment.user.avatarUrl">
-            <div>
-              <span class="name">{{comment.user.nickname}}</span>
-              <span class="time">{{comment.time}}</span>
-            </div>
-          </div>
-          <div class="like">
-            <span>{{comment.likedCount}}</span>
-            <img src="../assets/like.png">
-          </div>
-        </div>
-        <div class="comment_text">
-          {{comment.content}}
-        </div>
-      </li>
-    </ul>
-    <div class="title">最新评论</div>
-    <ul>
-      <li v-for="(comment, index) in data.comments">
-        <div class="comment_top">
-          <div class="comment_author">
-            <img :src="comment.user.avatarUrl">
-            <div>
-              <span class="name">{{comment.user.nickname}}</span>
-              <span class="time">{{comment.time}}</span>
-            </div>
-          </div>
-          <div class="like">
-            <span>{{comment.likedCount}}</span>
-            <img src="../assets/like.png">
-          </div>
-        </div>
-        <div class="comment_text">
-          {{comment.content}}
-        </div>
-      </li>
-    </ul>
-    </scroller>
-  </div>
+
 
 </template>
 <script>
@@ -53,31 +8,27 @@
     data(){
       return {
         activeNunber: '',
-        id:705123491,
-        offset:0,
-        data:{
-          hotComments:[
-            {
-              user: {
-                avatarUrl: ''
-              }
-            }
-          ],
-          comments:[
-            {
-              user: {
-                avatarUrl: ''
-              }
-            }
-          ]
-        }
+
+
       }
     },
     computed:{
 
     },
-    mounted(){
+    activated(){
+      this.id = this.$route.query.id
       this.getData()
+      console.log('mounted')
+    },
+    deactivated: function () {
+      console.log(this.$refs.myscroller)
+      this.$refs.myscroller.finishInfinite(true)
+      console.log('destroyed')
+    },
+    beforeDestroy(){
+//      console.log(this.$refs.myscroller)
+//      this.$refs.myscroller.finishInfinite(true)
+//      console.log('destroyed')
     },
     methods: {
       itemclick(index){
@@ -99,9 +50,13 @@
         const that = this
         this.$http.get(baseUrl + '/comment/playlist?id='+that.id+'&offset='+that.offset)
           .then(function (response) {
+            if(response.data.comments.length<20){
+              done(true)
+              return;
+            }
             that.data.comments = that.data.comments.concat(response.data.comments)
             that.formattime()
-            console.log(that.data)
+            that.offset++
             done()
           })
           .catch(function (error) {

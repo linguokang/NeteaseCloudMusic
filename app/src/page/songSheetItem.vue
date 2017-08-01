@@ -30,8 +30,10 @@
           <div>{{playlist.subscribedCount}}</div>
         </li>
         <li>
+          <router-link :to="{ path: '/comment', query: { id: this.id,type: 'playlist' }}">
           <img src="../assets/comment.png">
           <div>{{playlist.commentCount}}</div>
+          </router-link>
         </li>
         <li>
           <img src="../assets/Forward.png">
@@ -78,7 +80,7 @@
 </template>
 <script>
   import { baseUrl } from '../config/env.js'
-  import playlist from '../components/playlist'
+//  import playlist from '../components/playlist'
   export default{
     data(){
       return {
@@ -95,10 +97,10 @@
     activated() {
       this.id = this.$route.query.id
       this.getData()
-      console.log(11111)
     },
     mounted(){
-
+//      this.id = this.$route.query.id
+//      this.getData()
     },
     methods: {
       playsong(id){

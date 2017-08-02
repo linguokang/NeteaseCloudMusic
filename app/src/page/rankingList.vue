@@ -1,7 +1,7 @@
 <template>
     <div>
 
-        <div>个性推荐</div>
+        <div>排行榜</div>
     </div>
 </template>
 <style>

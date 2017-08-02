@@ -5,7 +5,7 @@
       <div class="header">
         <img src="../assets/left_arrow.png" @click='goback()'>
         <div>歌单</div>
-        <img src="../assets/Playing_now.png">
+        <img src="../assets/Playing_now.png" @click='showAudio()'>
       </div>
       <div class="content">
         <div class="songSheetimg">
@@ -121,6 +121,9 @@
       },
       goback(){
         this.$router.go(-1)
+      },
+      showAudio(){
+        this.$store.dispatch('showaudioplay', true)
       }
     },
     components: {}

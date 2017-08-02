@@ -7,7 +7,6 @@
     </div>
     <!--歌单-->
     <div class="title"  v-if="this.type == 'playlist'">
-      <!--<div>playlist</div>-->
       <img :src="playlist.coverImgUrl">
       <div class="title_right">
         <span>{{playlist.name}}</span>
@@ -16,7 +15,6 @@
     </div>
     <!--歌曲-->
     <div class="title" v-else>
-      <!--<div>music</div>-->
       <img :src="songs[0].al.picUrl">
       <div class="title_right">
         <span>{{songs[0].name}}</span>
@@ -75,12 +73,10 @@
 <script>
   import { baseUrl } from '../config/env.js'
   import commentlist from '../components/commentlist.vue'
+  import { Loading } from 'element-ui';
   export default{
     data(){
       return {
-//        activeNunber: '',
-//        id: '',
-//        detailData: [],
         playlist: {
           creator: {
             avatarUrl: "",
@@ -121,50 +117,67 @@
             }
           ]
         },
+        loadingInstance:''
       }
     },
     activated(){
+      this.loadingInstance = Loading.service({
+        fullscreen:false,
+        text:'拼命加载中'
+      });
       this.id = this.$route.query.id
       this.type = this.$route.query.type
       if (this.type == 'playlist') {
-        this.getdetailData()
-        this.getplaylistData()
+        this.getplaylist()
+//        this.getdetailData()
+//        this.getplaylistData()
       } else if (this.type == 'music') {
         this.getmusicdetailData()
         this.getmusicData()
       }
-//      this.id = this.$route.query.id
-//      this.getData()
-//      console.log('mounted')
       console.log('commentmounted')
     },
     deactivated: function () {
       this.$refs.myscroller.finishInfinite(true)
     },
     methods: {
+      async getplaylist() {
+        try {
+          const v1 = await this.getdetailData();
+          const v2 = await this.getplaylistData();
+          this.data = v1.data
+          this.formattime()
+          this.playlist = v2.data.playlist
+          this.loadingInstance.close();
+        } catch (err) {
+          this.loadingInstance.close();
+          alert('加载错误')
+        }
+      },
 //      歌单
       getdetailData(){
         const that = this
-        this.$http.get(baseUrl + '/comment/playlist?id=' + that.id)
-          .then(function (response) {
-            that.data = response.data
-//            console.log(that.data)
-            that.formattime()
-          })
-          .catch(function (error) {
-            console.log(error)
-          })
+        const detailData = this.$http.get(baseUrl + '/comment/playlist?id=' + that.id)
+        return detailData
+//          .then(function (response) {
+//            that.data = response.data
+////            console.log(that.data)
+//            that.formattime()
+//          })
+//          .catch(function (error) {
+//            console.log(error)
+//          })
       },
       getplaylistData(){
         const that = this
-
-        this.$http.get(baseUrl + '/playlist/detail?id=' + that.id)
-          .then(function (response) {
-            that.playlist = response.data.playlist
-          })
-          .catch(function (error) {
-            console.log(error)
-          })
+        const playlistData =  this.$http.get(baseUrl + '/playlist/detail?id=' + that.id)
+        return playlistData
+//          .then(function (response) {
+//            that.playlist = response.data.playlist
+//          })
+//          .catch(function (error) {
+//            console.log(error)
+//          })
       },
       getmoreData(done){
         const that = this

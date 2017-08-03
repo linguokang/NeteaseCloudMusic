@@ -20,6 +20,7 @@ import songSheetItem  from '@/page/songSheetItem'
 import filterSongSheet  from '@/page/filterSongSheet'
 import comment  from '@/page/comment'
 import highqualityPlaylist  from '@/page/highqualityPlaylist'
+//import player  from '@/page/player'
 Vue.use(Router)
 
 export default new Router({
@@ -100,7 +101,11 @@ export default new Router({
       path: '/highqualityPlaylist',
       component: highqualityPlaylist,
     },
-
+    //{
+      //name: 'player',
+      //path: '/player',
+      //component: player,
+    //},
   ],
   scrollBehavior
 })

@@ -4,8 +4,8 @@ import * as types from '../types'
  * App通用配置
  */
 const state = {
-  showaudio:true,
-  songId:33638523
+  showaudio:false,
+  songId:''
 }
 
 const actions = {

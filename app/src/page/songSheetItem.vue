@@ -80,6 +80,7 @@
 </template>
 <script>
   import { baseUrl } from '../config/env.js'
+  import { Loading } from 'element-ui';
 //  import playlist from '../components/playlist'
   export default{
     data(){
@@ -91,7 +92,7 @@
           },
           coverImgUrl: ""
         },
-
+        loadingInstance:''
       }
     },
     activated() {
@@ -109,14 +110,20 @@
 //                console.log(this.$store.state.com.songId)
       },
       getData(){
+        this.loadingInstance = Loading.service({
+          fullscreen:false,
+          text:'拼命加载中'
+        });
         const that = this
 
         this.$http.get(baseUrl + '/playlist/detail?id='+that.id)
           .then(function (response) {
             that.playlist = response.data.playlist
+            that.loadingInstance.close();
           })
           .catch(function (error) {
             console.log(error)
+            this.loadingInstance.close();
           })
       },
       goback(){

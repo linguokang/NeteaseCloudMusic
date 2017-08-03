@@ -16,6 +16,7 @@
 <script>
   import qs from 'qs';
   import '../config/utils'
+  import { baseUrl } from '../config/env.js'
   export default{
     data(){
       return {
@@ -50,7 +51,7 @@
           return false
         }
 
-        this.$http.get('http://localhost:3000/search'+'?type=10&keywords='+this.$route.query.keywords)
+        this.$http.get(baseUrl+'/search'+'?type=10&keywords='+this.$route.query.keywords)
           .then(function(response){
 //          console.log(response.data.result);
             that.albums = response.data.result.albums

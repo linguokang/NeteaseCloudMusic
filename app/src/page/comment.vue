@@ -121,6 +121,7 @@
       }
     },
     activated(){
+      console.log('记载')
       this.loadingInstance = Loading.service({
         fullscreen:false,
         text:'拼命加载中'
@@ -132,8 +133,9 @@
 //        this.getdetailData()
 //        this.getplaylistData()
       } else if (this.type == 'music') {
-        this.getmusicdetailData()
-        this.getmusicData()
+        this.getsonglist()
+//        this.getmusicdetailData()
+//        this.getmusicData()
       }
       console.log('commentmounted')
     },
@@ -151,33 +153,30 @@
           this.loadingInstance.close();
         } catch (err) {
           this.loadingInstance.close();
+//          alert('加载错误')
+        }
+      },
+      async getsonglist() {
+        try {
+          const L1 = await this.getmusicdetailData()
+          const L2 = await this.getmusicData();
+          this.data = L1.data
+          this.formattime()
+          this.songs = L2.data.songs
+          this.loadingInstance.close();
+        } catch (err) {
+          this.loadingInstance.close();
           alert('加载错误')
         }
       },
 //      歌单
       getdetailData(){
         const that = this
-        const detailData = this.$http.get(baseUrl + '/comment/playlist?id=' + that.id)
-        return detailData
-//          .then(function (response) {
-//            that.data = response.data
-////            console.log(that.data)
-//            that.formattime()
-//          })
-//          .catch(function (error) {
-//            console.log(error)
-//          })
+    return this.$http.get(baseUrl + '/comment/playlist?id=' + that.id)
       },
       getplaylistData(){
         const that = this
-        const playlistData =  this.$http.get(baseUrl + '/playlist/detail?id=' + that.id)
-        return playlistData
-//          .then(function (response) {
-//            that.playlist = response.data.playlist
-//          })
-//          .catch(function (error) {
-//            console.log(error)
-//          })
+    return this.$http.get(baseUrl + '/playlist/detail?id=' + that.id)
       },
       getmoreData(done){
         const that = this
@@ -199,28 +198,12 @@
 //      歌曲
       getmusicdetailData(){
         const that = this
-        this.$http.get(baseUrl + '/comment/music?id=' + that.id)
-          .then(function (response) {
-            that.data = response.data
-            console.log(that.data)
-            that.formattime()
-            console.log('获取歌曲评论')
-          })
-          .catch(function (error) {
-            console.log(error)
-          })
+    return this.$http.get(baseUrl + '/comment/music?id=' + that.id)
       },
       getmusicData(){
         const that = this
 
-        this.$http.get(baseUrl + '/song/detail?ids=' + that.id)
-          .then(function (response) {
-            that.songs = response.data.songs
-            console.log('获取歌曲详情')
-          })
-          .catch(function (error) {
-            console.log(error)
-          })
+    return this.$http.get(baseUrl + '/song/detail?ids=' + that.id)
       },
       goback(){
         this.$router.go(-1)

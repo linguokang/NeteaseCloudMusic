@@ -4,7 +4,7 @@
       :on-refresh="refresh"
       :on-infinite="infinite">
       <ul>
-        <li v-for="(item,index) in items" @click='itemclick(index)'>
+        <li v-for="(item,index) in items" @click='playsong(item.id)'>
           <div>
             <span>{{ item.name }}</span>
             <span>{{ item.artists[0].name }}</span>
@@ -22,12 +22,15 @@
 <script>
   import qs from 'qs';
   import VueScroller from 'vue-scroller'
+  import { baseUrl } from '../config/env.js'
+//  import { Loading } from 'element-ui';
   export default{
     data(){
       return {
         activeNunber: '',
         items:[],
-        pages:0
+        pages:0,
+        loadingInstance:''
       }
     },
     mounted(){
@@ -47,7 +50,15 @@
       itemclick(index){
        console.log(index)
       },
+      playsong(id){
+        this.$store.dispatch('showaudioplay', true)
+        this.$store.dispatch('setsongId',id)
+      },
       init(offset,done){
+//        this.loadingInstance = Loading.service({
+//          fullscreen:false,
+//          text:'拼命加载中'
+//        });
         const that = this
         console.log(this.$route.query)
 
@@ -55,7 +66,7 @@
           return false
         }
 
-        this.$http.get('http://localhost:3000/search'+'?keywords='+this.$route.query.keywords+'&offset='+offset)
+        this.$http.get(baseUrl+'/search'+'?keywords='+this.$route.query.keywords+'&offset='+offset)
           .then(function(response){
           console.log(response.data.result);
             if(offset == 0){
@@ -63,6 +74,7 @@
             }else{
               that.items = that.items.concat( response.data.result.songs );
             }
+//            that.loadingInstance.close();
             done()
           })
           .catch(function(error){
@@ -71,15 +83,15 @@
       },
       refresh(done){
 
-        setTimeout(() => {
-          console.log('refresh')
+//        setTimeout(() => {
+//          console.log('refresh')
         this.pages = 0
         this.init(this.pages,done)
-        }, 1500)
+//        }, 1500)
       },
       infinite(done){
 
-        setTimeout(() => {
+//        setTimeout(() => {
           if(this.$route.path.indexOf('searchSingle')!==-1){
             console.log('infinite')
             this.init(this.pages,done)
@@ -88,7 +100,7 @@
           done()
         }
 
-      }, 1500)
+//      }, 1500)
 
       }
     },

@@ -42,14 +42,15 @@
       </div>
     </div>
 
-    <audio controls autoplay="autoplay" id="audio" :src='url[0].url' :style="{ display: 'none'}"
+    <audio controls autoplay id="audio" :src='url[0].url' :style="{ display: 'none'}"
            @timeupdate="timeupdate"
-           @playing="playing"
+
            @pause="pause"
            @ended="ended"
            @waiting="waiting"
            @error="error">
-      <source :src='url[0].url' id="source">
+      <source :src='url[0].url' type="audio/mpeg" id="source">
+      您的浏览器不支持音频播放。
     </audio>
 
   </div>
@@ -62,8 +63,8 @@
     data(){
       return {
         id: '',
-        show: true,
-//        show: false,
+//        show: true,
+        show: false,
         progres: 0,
         song: [
           {
@@ -99,6 +100,7 @@
       },
       getshowaudioplay(){
         return this.$store.state.com.showaudio
+        console.log(this.$store.state.com.showaudio)
       },
       getsongplayid(){
         return this.$store.state.com.songId
@@ -127,6 +129,7 @@
     watch: {
       getshowaudioplay(){
         this.show = this.getshowaudioplay
+        console.log('show')
       },
       getsongplayid(){
         this.id = this.getsongplayid
@@ -281,9 +284,8 @@
     components: {}
   }
 </script>
-<style lang="scss" scoped>
+<style lang="scss">
   @import '../style/mixin';
-
   .player {
     position: fixed;
     /*position: absolute;*/
@@ -308,7 +310,7 @@
       display: flex;
       flex-direction: row;
       justify-content: space-between;
-      padding: px2rem(5px) 0;
+      padding: px2rem(5px) px2rem(10px);
       align-items: center;
       border-bottom: 1px solid #eee;
       img {
@@ -339,6 +341,7 @@
         width: px2rem(285px);
         height: px2rem(285px);
         margin: 0 auto;
+        margin-top: px2rem(-50px);
         .dish {
           width: 100%;
         }
@@ -349,6 +352,7 @@
           margin-left: px2rem(-100px);
           margin-top: px2rem(-100px);
           width: px2rem(200px);
+          height: px2rem(200px);
           border-radius: 50%;
         }
       }
@@ -357,7 +361,7 @@
       }
       .active {
 
-        transform: rotate(30deg);
+        transform: rotate(16deg);
         transform-origin: px2rem(10px) px2rem(10px);
       }
       .lyric-holder{
